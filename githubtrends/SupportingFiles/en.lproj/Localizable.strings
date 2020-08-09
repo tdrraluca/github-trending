@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  githubtrends
+
+  Created by Raluca Toadere on 09/08/2020.
+  Copyright © 2020 selva. All rights reserved.
+*/
+
+
+"ERROR_TITLE" = "Error";
+"OK" = "Ok";
+"REPO_LIST_ERROR_MESSAGE" = "Something went wrong when fetching the list of trending repositories";
+"REPO_LIST_TITLE" = "Github Trends";
+"SEARCH_PLACEHOLDER" = "Search";
+
