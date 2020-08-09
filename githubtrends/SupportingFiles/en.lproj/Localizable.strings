@@ -9,7 +9,10 @@
 
 "ERROR_TITLE" = "Error";
 "OK" = "Ok";
+"BACK" = "Back";
 "REPO_LIST_ERROR_MESSAGE" = "Something went wrong when fetching the list of trending repositories";
 "REPO_LIST_TITLE" = "Github Trends";
 "SEARCH_PLACEHOLDER" = "Search";
+
+"REPO_DETAILS_ERROR_MESSAGE" = "Something went wrong when fetching the repository details";
 

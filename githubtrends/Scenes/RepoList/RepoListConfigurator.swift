@@ -8,12 +8,12 @@
 
 import UIKit
 
-class RepoListConfigurator {
+final class RepoListConfigurator {
     class func configureScene() -> UIViewController {
         let viewController = RepoListViewController()
-        let navigationController = NavigationController(rootViewController: viewController)
         let viewModel = RepoListViewModel()
         viewController.business = viewModel
-        return navigationController
+        viewController.router = RepoListRouter(viewController: viewController, output: viewModel)
+        return NavigationController(rootViewController: viewController)
     }
 }

@@ -13,13 +13,13 @@ enum APIModel {
         let author: String
         let name: String
         let descriptionText: String
-        let starCount: UInt
+        let currentPerioStarCount: UInt
 
         enum RootCodingKeys: String, CodingKey {
             case author
             case name
             case description
-            case stars
+            case currentPeriodStars
         }
 
         init(from decoder: Decoder) throws {
@@ -27,7 +27,7 @@ enum APIModel {
             author = try rootObject.decode(String.self, forKey: .author)
             name = try rootObject.decode(String.self, forKey: .name)
             descriptionText = try rootObject.decode(String.self, forKey: .description)
-            starCount = try rootObject.decode(UInt.self, forKey: .stars)
+            currentPerioStarCount = try rootObject.decode(UInt.self, forKey: .currentPeriodStars)
         }
     }
 }

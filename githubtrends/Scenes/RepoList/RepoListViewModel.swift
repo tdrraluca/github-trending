@@ -18,20 +18,28 @@ struct RepoListError: Error {
 typealias RepoListResult = Result<[RepoPreview], RepoListError>
 
 protocol RepoListBusiness {
+    var reposBinding: AnyPublisher<RepoListResult, Never> { get }
+
     func retrieveRepos()
 
     func filteredRepos(query: String)
-
-    var reposBinding: AnyPublisher<RepoListResult, Never> { get }
+    func selectRepo(at index: Int)
 }
 
-class RepoListViewModel: RepoListBusiness {
+protocol RepoListOutput {
+    var preview: APIModel.RepoPreview? { get }
+}
 
-    var repos = [RepoPreview]()
+final class RepoListViewModel: RepoListBusiness {
+
+    private var repos = [RepoPreview]()
+    private var apiRepos = [APIModel.RepoPreview]()
+    private var selectedRepoIndex: Int?
 
     lazy var reposBinding: AnyPublisher<RepoListResult, Never> = {
         reposCurrentValueSubject.eraseToAnyPublisher()
     }()
+
     private var reposCurrentValueSubject = CurrentValueSubject<RepoListResult, Never>(.success([]))
 
     func retrieveRepos() {
@@ -39,8 +47,10 @@ class RepoListViewModel: RepoListBusiness {
             guard let self = self else { return }
 
             result.onSuccess { apiRepos in
+                self.apiRepos = apiRepos
+
                 let repos: [RepoPreview] = apiRepos.map {
-                    let starCount = "\u{2606} \($0.starCount) stars this week"
+                    let starCount = "\u{2606} \($0.currentPerioStarCount) stars this week"
                     return RepoPreview(name: $0.name,
                                        descriptionText: $0.descriptionText,
                                        starCount: starCount)
@@ -64,5 +74,17 @@ class RepoListViewModel: RepoListBusiness {
         }
 
         self.reposCurrentValueSubject.send(.success(filtered))
+    }
+
+    func selectRepo(at index: Int) {
+        selectedRepoIndex = index
+    }
+}
+
+extension RepoListViewModel: RepoListOutput {
+    var preview: APIModel.RepoPreview? {
+        guard let index = selectedRepoIndex else { return nil }
+        
+        return apiRepos[index]
     }
 }

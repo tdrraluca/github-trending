@@ -9,9 +9,11 @@
 import UIKit
 import Combine
 
-class RepoListViewController: UIViewController {
+final class RepoListViewController: UIViewController {
 
     var business: RepoListBusiness!
+    var router: RepoListRouting!
+    
     var reposSubscription: AnyCancellable?
 
     private var repos = [RepoPreview]()
@@ -22,6 +24,10 @@ class RepoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = Strings.repoListTitle.localized
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: Strings.back.localized,
+                                                                style: .plain,
+                                                                target: nil,
+                                                                action: nil)
 
         view.backgroundColor = .white
         setupTableView()
@@ -82,6 +88,11 @@ extension RepoListViewController: UITableViewDelegate, UITableViewDataSource {
 
         cell.set(repo: repos[indexPath.row])
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        business.selectRepo(at: indexPath.row)
+        router.routeToDetails()
     }
 }
 

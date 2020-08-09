@@ -14,7 +14,8 @@ class NavigationController: UINavigationController {
 
         navigationBar.isTranslucent = false
         navigationBar.barTintColor = .white
-        navigationBar.tintColor = .gray
+        navigationBar.tintColor = .blueBayoux
+        navigationBar.shadowImage = UIImage()
 
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.blueBayoux]
         navigationBar.titleTextAttributes = attributes
