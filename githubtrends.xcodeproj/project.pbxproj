@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B1CA5FF24E1C64A00AB002E /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B1CA5FE24E1C64A00AB002E /* Kingfisher.framework */; };
 		1B65AEFC24DDA22E0025182E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B65AEFB24DDA22E0025182E /* AppDelegate.swift */; };
 		1B65AF0024DDA22E0025182E /* RepoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B65AEFF24DDA22E0025182E /* RepoListViewController.swift */; };
 		1B65AF0524DDA22F0025182E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B65AF0424DDA22F0025182E /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B1CA5FE24E1C64A00AB002E /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = SOURCE_ROOT; };
 		1B65AEF824DDA22E0025182E /* githubtrends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = githubtrends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B65AEFB24DDA22E0025182E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B65AEFF24DDA22E0025182E /* RepoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B1CA5FF24E1C64A00AB002E /* Kingfisher.framework in Frameworks */,
 				1B65AF1F24DDAB7F0025182E /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,6 +190,7 @@
 		1B65AF1D24DDAB410025182E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B1CA5FE24E1C64A00AB002E /* Kingfisher.framework */,
 				1B65AF1E24DDAB7F0025182E /* Alamofire.framework */,
 			);
 			path = Frameworks;
@@ -328,12 +332,14 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

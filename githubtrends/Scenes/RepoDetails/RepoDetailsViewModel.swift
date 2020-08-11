@@ -33,9 +33,15 @@ final class RepoDetailsViewModel: RepoDetailsBusiness {
     private var repoDetailsCurrentValueSubject: CurrentValueSubject<RepoDetails, Never>
 
     init(preview: APIModel.RepoPreview) {
+        let starsCount = Strings.starsCount.localized(with: "\(preview.starsCount)")
+        let forksCount = Strings.forksCount.localized(with: "\(preview.forksCount)")
+
         let repoDetails = RepoDetails(name: preview.name,
                                       author: preview.author,
-                                      description: preview.descriptionText)
+                                      description: preview.descriptionText,
+                                      starsCount: starsCount,
+                                      forksCount: forksCount,
+                                      avatarURL: preview.avatarURL)
 
         repoDetailsCurrentValueSubject = CurrentValueSubject<RepoDetails, Never>(repoDetails)
     }

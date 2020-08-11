@@ -12,4 +12,7 @@ struct RepoDetails {
     let name: String
     let author: String
     let description: String
+    let starsCount: String
+    let forksCount: String
+    let avatarURL: URL?
 }

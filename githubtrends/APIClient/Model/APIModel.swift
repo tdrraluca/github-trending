@@ -13,13 +13,19 @@ enum APIModel {
         let author: String
         let name: String
         let descriptionText: String
-        let currentPerioStarCount: UInt
+        let currentPeriodStarCount: UInt
+        let starsCount: UInt
+        let forksCount: UInt
+        let avatarURL: URL?
 
         enum RootCodingKeys: String, CodingKey {
             case author
             case name
             case description
             case currentPeriodStars
+            case stars
+            case forks
+            case avatar
         }
 
         init(from decoder: Decoder) throws {
@@ -27,7 +33,15 @@ enum APIModel {
             author = try rootObject.decode(String.self, forKey: .author)
             name = try rootObject.decode(String.self, forKey: .name)
             descriptionText = try rootObject.decode(String.self, forKey: .description)
-            currentPerioStarCount = try rootObject.decode(UInt.self, forKey: .currentPeriodStars)
+            currentPeriodStarCount = try rootObject.decode(UInt.self, forKey: .currentPeriodStars)
+            starsCount = try rootObject.decode(UInt.self, forKey: .stars)
+            forksCount = try rootObject.decode(UInt.self, forKey: .forks)
+
+            if let avatarURLString = try? rootObject.decodeIfPresent(String.self, forKey: .avatar) {
+                avatarURL = URL(string: avatarURLString)
+            } else {
+                avatarURL = nil
+            }
         }
     }
 }

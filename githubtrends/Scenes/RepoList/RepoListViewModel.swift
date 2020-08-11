@@ -50,10 +50,10 @@ final class RepoListViewModel: RepoListBusiness {
                 self.apiRepos = apiRepos
 
                 let repos: [RepoPreview] = apiRepos.map {
-                    let starCount = "\u{2606} \($0.currentPerioStarCount) stars this week"
+                    let starCount = Strings.starsThisWeekCount.localized(with: "\($0.currentPeriodStarCount)")
                     return RepoPreview(name: $0.name,
                                        descriptionText: $0.descriptionText,
-                                       starCount: starCount)
+                                       starCount: "\u{2606} " + starCount)
                 }
                 self.repos = repos
                 self.reposCurrentValueSubject.send(.success(repos))

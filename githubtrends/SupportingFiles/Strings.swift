@@ -16,9 +16,16 @@ enum Strings {
     case repoListErrorMessage
     case searchPlaceholder
     case repoDetailsErrorMessage
+    case starsThisWeekCount
+    case starsCount
+    case forksCount
 
     var localized: String {
         return NSLocalizedString(localizationKey, tableName: nil, comment: "")
+    }
+
+    func localized(with arguments: CVarArg...) -> String {
+        return String(format: self.localized, arguments: arguments)
     }
 
     private var localizationKey: String {
@@ -37,6 +44,13 @@ enum Strings {
             return "SEARCH_PLACEHOLDER"
         case .repoDetailsErrorMessage:
             return "REPO_DETAILS_ERROR_MESSAGE"
+        case .starsThisWeekCount:
+            return "STARS_THIS_WEEK_COUNT"
+        case .starsCount:
+            return "STARS_COUNT"
+        case .forksCount:
+            return "FORKS_COUNT"
+
         }
     }
 }
