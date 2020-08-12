@@ -14,16 +14,17 @@ protocol SearchBarDelegate: class {
 
 class SearchBar: UIView {
     @IBOutlet private var contentView: UIView!
+    
     @IBOutlet private weak var placeholderLabel: UILabel!
     @IBOutlet private weak var textField: UITextField!
     @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var placeholderStackView: UIStackView!
+    
     weak var delegate: SearchBarDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
-
     }
 
     required init?(coder: NSCoder) {

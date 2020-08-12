@@ -17,6 +17,6 @@
 "REPO_DETAILS_ERROR_MESSAGE" = "Something went wrong when fetching the repository details";
 
 "STARS_THIS_WEEK_COUNT" = "%@ stars this week";
-"STARS_COUNT" = "%@ stars";
-"FORKS_COUNT" = "%@ forks";
+"STARS_COUNT" = "%@ Stars";
+"FORKS_COUNT" = "%@ Forks";
 

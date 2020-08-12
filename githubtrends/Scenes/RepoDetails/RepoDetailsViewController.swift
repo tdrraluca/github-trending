@@ -15,9 +15,12 @@ final class RepoDetailsViewController: UIViewController {
     var business: RepoDetailsBusiness!
     var repoSubscription: AnyCancellable?
 
+    @IBOutlet private weak var detailsSeparatorView: UIView!
+    @IBOutlet private weak var forksDetailView: DetailView!
+    @IBOutlet private weak var starsDetailsView: DetailView!
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var topSectionView: UIView!
-    @IBOutlet private weak var boundaryView: UIView!
+    @IBOutlet private weak var detailsSegmentedView: UIView!
     @IBOutlet private weak var bottomSectionView: UIView!
 
     @IBOutlet private weak var avatarImageView: UIImageView!
@@ -57,6 +60,11 @@ final class RepoDetailsViewController: UIViewController {
             }
             self.authorLabel.text = repoDetails.author
             self.descriptionLabel.text = repoDetails.description
+
+            self.starsDetailsView.set(DetailViewModel(icon: self.starImage(),
+                                                      detail: repoDetails.starsCount))
+            self.forksDetailView.set(DetailViewModel(icon: self.forkImage(),
+                                                     detail: repoDetails.forksCount))
         }
     }
 
@@ -74,18 +82,31 @@ final class RepoDetailsViewController: UIViewController {
         descriptionLabel.textAlignment = .center
         descriptionLabel.numberOfLines = 0
 
-        boundaryView?.superview?.bringSubviewToFront(boundaryView)
-        boundaryView.backgroundColor = .white
-        boundaryView.layer.borderWidth = 1.0
-        boundaryView.layer.borderColor = UIColor.frenchGray.cgColor
-        boundaryView.layer.cornerRadius = 6.0
+        detailsSegmentedView?.superview?.bringSubviewToFront(detailsSegmentedView)
+        detailsSegmentedView.backgroundColor = .white
+        detailsSegmentedView.layer.borderWidth = 1.0
+        detailsSegmentedView.layer.borderColor = UIColor.frenchGray.cgColor
+        detailsSegmentedView.layer.cornerRadius = 6.0
+        detailsSegmentedView.clipsToBounds = true
+        detailsSeparatorView.backgroundColor = .frenchGray
 
         bottomSectionView.backgroundColor = .wildSand
+        scrollView.backgroundColor = .wildSand
 
         readmeTitleLabel.text = "Readme.md"
         readmeTitleLabel.textColor = .papaGreen
         readmeTitleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
 
         readmeTextView.backgroundColor = .clear
+    }
+
+    private func starImage() -> UIImage {
+        let imageConfiguration = UIImage.SymbolConfiguration(scale: .small)
+        return UIImage(systemName: "star.fill", withConfiguration: imageConfiguration)!
+    }
+
+    private func forkImage() -> UIImage {
+        let imageConfiguration = UIImage.SymbolConfiguration(scale: .small)
+        return UIImage(systemName: "tuningfork", withConfiguration: imageConfiguration)!
     }
 }

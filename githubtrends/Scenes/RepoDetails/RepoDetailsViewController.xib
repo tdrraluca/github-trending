@@ -12,12 +12,15 @@
                 <outlet property="authorLabel" destination="QnA-Em-5iW" id="y34-TE-tv3"/>
                 <outlet property="avatarImageView" destination="fKL-kD-2lB" id="8uG-eX-p4F"/>
                 <outlet property="bottomSectionView" destination="EVI-c9-Q3d" id="gp1-ow-Kkd"/>
-                <outlet property="boundaryView" destination="Evl-km-xot" id="Nw6-h8-VQL"/>
                 <outlet property="descriptionLabel" destination="71B-WZ-eus" id="oqa-54-IQX"/>
+                <outlet property="detailsSegmentedView" destination="Evl-km-xot" id="Nw6-h8-VQL"/>
+                <outlet property="detailsSeparatorView" destination="Vag-z3-U5X" id="shz-zX-NER"/>
+                <outlet property="forksDetailView" destination="GVJ-QR-MH4" id="rTS-PB-6O3"/>
                 <outlet property="readmeTextView" destination="UV9-U9-qu9" id="zXB-EU-dh4"/>
                 <outlet property="readmeTitleLabel" destination="xOM-oX-t6T" id="uwc-5x-NfC"/>
                 <outlet property="scrollView" destination="pbK-Fa-S8V" id="8LU-ju-axA"/>
-                <outlet property="separatorView" destination="1s6-KF-1aM" id="h9W-NT-Rom"/>
+                <outlet property="separatorView" destination="1s6-KF-1aM" id="TUi-Zw-7dv"/>
+                <outlet property="starsDetailsView" destination="quc-kS-1uO" id="xg3-3z-vCI"/>
                 <outlet property="topSectionView" destination="rKH-KY-ZIF" id="Auq-hl-nHb"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Jcn-jC-nVL"/>
             </connections>
@@ -93,11 +96,38 @@
                                         <constraint firstItem="clY-W7-IJb" firstAttribute="top" secondItem="rKH-KY-ZIF" secondAttribute="top" constant="10" id="nwf-82-yNY"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Evl-km-xot" userLabel="Boundary View">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Evl-km-xot" userLabel="Details Segmented View">
                                     <rect key="frame" x="44" y="262" width="326" height="40"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="quc-kS-1uO" userLabel="Stars Detail View" customClass="DetailView" customModule="githubtrends" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="162.5" height="40"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vag-z3-U5X" userLabel="Details Separator View">
+                                            <rect key="frame" x="162.5" y="0.0" width="1" height="40"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="1" id="LUG-Lq-Xeg"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="85" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="GVJ-QR-MH4" userLabel="Forks Detail View" customClass="DetailView" customModule="githubtrends" customModuleProvider="target">
+                                            <rect key="frame" x="163.5" y="0.0" width="162.5" height="40"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        </view>
+                                    </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="CdD-5H-JvW"/>
+                                        <constraint firstItem="GVJ-QR-MH4" firstAttribute="width" secondItem="quc-kS-1uO" secondAttribute="width" id="4z9-tU-5cA"/>
+                                        <constraint firstItem="Vag-z3-U5X" firstAttribute="top" secondItem="Evl-km-xot" secondAttribute="top" id="5nY-8E-X9B"/>
+                                        <constraint firstItem="GVJ-QR-MH4" firstAttribute="top" secondItem="Evl-km-xot" secondAttribute="top" id="DnY-tr-Fc6"/>
+                                        <constraint firstItem="quc-kS-1uO" firstAttribute="top" secondItem="Evl-km-xot" secondAttribute="top" id="U1C-GF-0ZQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="Vag-z3-U5X" secondAttribute="bottom" id="X6e-Gn-UsK"/>
+                                        <constraint firstItem="GVJ-QR-MH4" firstAttribute="leading" secondItem="Vag-z3-U5X" secondAttribute="trailing" id="dQa-Zq-EgQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="quc-kS-1uO" secondAttribute="bottom" id="eQL-Bo-QVg"/>
+                                        <constraint firstItem="Vag-z3-U5X" firstAttribute="leading" secondItem="quc-kS-1uO" secondAttribute="trailing" id="eYi-JR-keR"/>
+                                        <constraint firstAttribute="bottom" secondItem="GVJ-QR-MH4" secondAttribute="bottom" id="nX6-dk-kWq"/>
+                                        <constraint firstItem="quc-kS-1uO" firstAttribute="leading" secondItem="Evl-km-xot" secondAttribute="leading" id="scb-VD-SsC"/>
+                                        <constraint firstAttribute="trailing" secondItem="GVJ-QR-MH4" secondAttribute="trailing" id="ske-eH-HOW"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVI-c9-Q3d" userLabel="Bottom Section View">
