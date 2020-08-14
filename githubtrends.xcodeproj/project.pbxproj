@@ -10,6 +10,10 @@
 		1B1CA5FF24E1C64A00AB002E /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B1CA5FE24E1C64A00AB002E /* Kingfisher.framework */; };
 		1B1CA60224E312DC00AB002E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1CA60124E312DC00AB002E /* DetailView.swift */; };
 		1B1CA60424E312F000AB002E /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B1CA60324E312F000AB002E /* DetailView.xib */; };
+		1B48249224E693E800A51616 /* RepoReadmeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48249124E693E800A51616 /* RepoReadmeRequest.swift */; };
+		1B48249424E6942300A51616 /* RepoReadmeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48249324E6942300A51616 /* RepoReadmeWorker.swift */; };
+		1B48249624E6AF7E00A51616 /* ReadmeDownloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48249524E6AF7E00A51616 /* ReadmeDownloadRequest.swift */; };
+		1B48249824E6BF0600A51616 /* Down.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B48249724E6BF0600A51616 /* Down.framework */; };
 		1B65AEFC24DDA22E0025182E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B65AEFB24DDA22E0025182E /* AppDelegate.swift */; };
 		1B65AF0024DDA22E0025182E /* RepoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B65AEFF24DDA22E0025182E /* RepoListViewController.swift */; };
 		1B65AF0524DDA22F0025182E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B65AF0424DDA22F0025182E /* Assets.xcassets */; };
@@ -47,6 +51,10 @@
 		1B1CA5FE24E1C64A00AB002E /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = SOURCE_ROOT; };
 		1B1CA60124E312DC00AB002E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		1B1CA60324E312F000AB002E /* DetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
+		1B48249124E693E800A51616 /* RepoReadmeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoReadmeRequest.swift; sourceTree = "<group>"; };
+		1B48249324E6942300A51616 /* RepoReadmeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoReadmeWorker.swift; sourceTree = "<group>"; };
+		1B48249524E6AF7E00A51616 /* ReadmeDownloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeDownloadRequest.swift; sourceTree = "<group>"; };
+		1B48249724E6BF0600A51616 /* Down.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Down.framework; path = Carthage/Build/iOS/Down.framework; sourceTree = SOURCE_ROOT; };
 		1B65AEF824DDA22E0025182E /* githubtrends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = githubtrends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B65AEFB24DDA22E0025182E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B65AEFF24DDA22E0025182E /* RepoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B1CA5FF24E1C64A00AB002E /* Kingfisher.framework in Frameworks */,
+				1B48249824E6BF0600A51616 /* Down.framework in Frameworks */,
 				1B65AF1F24DDAB7F0025182E /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,6 +193,8 @@
 			children = (
 				1B65AF3124DDC3220025182E /* Model */,
 				1B65AF1424DDA5280025182E /* TrendingRepoRequest.swift */,
+				1B48249124E693E800A51616 /* RepoReadmeRequest.swift */,
+				1B48249524E6AF7E00A51616 /* ReadmeDownloadRequest.swift */,
 				1B65AF1524DDA5280025182E /* APIClient.swift */,
 				1B65AF1624DDA5280025182E /* Request.swift */,
 			);
@@ -204,6 +215,7 @@
 		1B65AF1D24DDAB410025182E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B48249724E6BF0600A51616 /* Down.framework */,
 				1B1CA5FE24E1C64A00AB002E /* Kingfisher.framework */,
 				1B65AF1E24DDAB7F0025182E /* Alamofire.framework */,
 			);
@@ -214,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				1B65AF3424DDC5CB0025182E /* RepoListWorker.swift */,
+				1B48249324E6942300A51616 /* RepoReadmeWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -348,6 +361,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Down.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -355,6 +369,7 @@
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Down.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -368,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B65AF6124E0795D0025182E /* RepoListRouter.swift in Sources */,
+				1B48249424E6942300A51616 /* RepoReadmeWorker.swift in Sources */,
 				1B65AF2724DDB4430025182E /* RepoListViewModel.swift in Sources */,
 				1B65AF0024DDA22E0025182E /* RepoListViewController.swift in Sources */,
 				1B65AF1824DDA5280025182E /* TrendingRepoRequest.swift in Sources */,
@@ -376,6 +392,7 @@
 				1B65AF3024DDC1B70025182E /* RepoPreview.swift in Sources */,
 				1B65AF1A24DDA5280025182E /* Request.swift in Sources */,
 				1B65AF4524E0233C0025182E /* UIColor+Palette.swift in Sources */,
+				1B48249224E693E800A51616 /* RepoReadmeRequest.swift in Sources */,
 				1B65AF3C24DDCC9F0025182E /* NavigationController.swift in Sources */,
 				1B65AF4224DDD6E00025182E /* RepoPreviewCell.swift in Sources */,
 				1B1CA60224E312DC00AB002E /* DetailView.swift in Sources */,
@@ -389,6 +406,7 @@
 				1B65AF5324E048FD0025182E /* SearchBar.swift in Sources */,
 				1B65AF3524DDC5CB0025182E /* RepoListWorker.swift in Sources */,
 				1B65AF1924DDA5280025182E /* APIClient.swift in Sources */,
+				1B48249624E6AF7E00A51616 /* ReadmeDownloadRequest.swift in Sources */,
 				1B65AF2524DDB3FA0025182E /* RepoListConfigurator.swift in Sources */,
 				1B65AF5724E0726B0025182E /* RepoDetailsConfigurator.swift in Sources */,
 			);

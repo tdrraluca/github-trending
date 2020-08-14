@@ -12,7 +12,7 @@ class RepoDetailsConfigurator {
     class func configureScene(preview: APIModel.RepoPreview) -> UIViewController {
         let viewController = RepoDetailsViewController()
         let viewModel = RepoDetailsViewModel(preview: preview)
-        viewController.business = viewModel
+        viewController.businessLogic = viewModel
         return viewController
     }
 }

@@ -15,4 +15,5 @@ struct RepoDetails {
     let starsCount: String
     let forksCount: String
     let avatarURL: URL?
+    let readme: String?
 }

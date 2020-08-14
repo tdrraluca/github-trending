@@ -9,10 +9,12 @@
 import UIKit
 import Combine
 import Kingfisher
+import Down
+import WebKit
 
 final class RepoDetailsViewController: UIViewController {
 
-    var business: RepoDetailsBusiness!
+    var businessLogic: RepoDetailsBusiness!
     var repoSubscription: AnyCancellable?
 
     @IBOutlet private weak var detailsSeparatorView: UIView!
@@ -28,16 +30,21 @@ final class RepoDetailsViewController: UIViewController {
     @IBOutlet private weak var separatorView: UIView!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var readmeTitleLabel: UILabel!
-    @IBOutlet private weak var readmeTextView: UITextView!
+    @IBOutlet private weak var markupViewContainer: UIView!
+    @IBOutlet private weak var markupViewContainerHeightConstraint: NSLayoutConstraint!
+
+    private var markupView: DownView?
 
     private var repoDetails: RepoDetails?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupSubviews()
+
         setupBindings()
 
-        setupSubviews()
+        businessLogic.retrieveRepoDetails()
     }
 
     override func viewDidLayoutSubviews() {
@@ -48,7 +55,7 @@ final class RepoDetailsViewController: UIViewController {
     }
 
     private func setupBindings() {
-        repoSubscription = business.repoDetailsBinding.sink { [weak self] repoDetails in
+        repoSubscription = businessLogic.repoDetailsBinding.sink { [weak self] repoDetails in
             guard let self = self else { return }
 
             self.navigationItem.title = repoDetails.name
@@ -65,6 +72,15 @@ final class RepoDetailsViewController: UIViewController {
                                                       detail: repoDetails.starsCount))
             self.forksDetailView.set(DetailViewModel(icon: self.forkImage(),
                                                      detail: repoDetails.forksCount))
+
+            if let readme = repoDetails.readme {
+                self.readmeTitleLabel.isHidden = false
+                self.markupViewContainer.isHidden = false
+                self.show(readme: readme)
+            } else {
+                self.readmeTitleLabel.isHidden = true
+                self.markupViewContainerHeightConstraint.constant = 0
+            }
         }
     }
 
@@ -96,8 +112,43 @@ final class RepoDetailsViewController: UIViewController {
         readmeTitleLabel.text = "Readme.md"
         readmeTitleLabel.textColor = .papaGreen
         readmeTitleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+    }
 
-        readmeTextView.backgroundColor = .clear
+    private func show(readme: String) {
+        if markupView == nil {
+            buildMarkupView(readme: readme)
+        } else {
+            try? markupView?.update(markdownString: readme)
+        }
+    }
+
+    private func buildMarkupView(readme: String) {
+        let javaScript = """
+        var meta = document.createElement('meta');
+        meta.setAttribute('name', 'viewport');
+        meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        """
+        let userScript = WKUserScript(source: javaScript,
+                                      injectionTime: WKUserScriptInjectionTime.atDocumentEnd,
+                                      forMainFrameOnly: true)
+        let wkUController = WKUserContentController()
+        wkUController.addUserScript(userScript)
+        let wkWebConfig = WKWebViewConfiguration()
+        wkWebConfig.userContentController = wkUController
+
+        guard let markupView = try? DownView(frame: .zero, markdownString: readme, configuration: wkWebConfig, didLoadSuccessfully: {
+            self.markupView?.evaluateJavaScript("document.documentElement.scrollHeight", completionHandler: { (height, error) in
+                self.markupViewContainerHeightConstraint?.constant = height as! CGFloat
+            })
+        }) else { return }
+
+        markupViewContainer.backgroundColor = .clear
+        markupView.isOpaque = false
+        markupView.backgroundColor = .clear
+        markupView.scrollView.backgroundColor = .clear
+        markupViewContainer.addFillingSubview(markupView)
+        self.markupView = markupView
     }
 
     private func starImage() -> UIImage {

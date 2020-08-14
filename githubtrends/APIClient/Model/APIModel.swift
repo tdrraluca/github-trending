@@ -44,6 +44,23 @@ enum APIModel {
             }
         }
     }
+
+    struct RepoReadme: Decodable {
+        let downloadURL: URL?
+
+        enum RootCodingKeys: String, CodingKey {
+            case downloadURL = "download_url"
+        }
+
+        init(from decoder: Decoder) throws {
+            let rootObject = try decoder.container(keyedBy: RootCodingKeys.self)
+            if let downloadURLString = try rootObject.decodeIfPresent(String.self, forKey: .downloadURL) {
+                downloadURL = URL(string: downloadURLString)
+            } else {
+                downloadURL = nil
+            }
+        }
+    }
 }
 
 

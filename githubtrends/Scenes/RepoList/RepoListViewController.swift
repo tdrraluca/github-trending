@@ -11,7 +11,7 @@ import Combine
 
 final class RepoListViewController: UIViewController {
 
-    var business: RepoListBusiness!
+    var businessLogic: RepoListBusiness!
     var router: RepoListRouting!
     
     var reposSubscription: AnyCancellable?
@@ -44,7 +44,7 @@ final class RepoListViewController: UIViewController {
     }
 
     private func setupReposBinding() {
-        reposSubscription = business.reposBinding.sink { [weak self] result in
+        reposSubscription = businessLogic.reposBinding.sink { [weak self] result in
             guard let self = self else { return }
 
             result.onSuccess { repos in
@@ -58,7 +58,7 @@ final class RepoListViewController: UIViewController {
             }
         }
 
-        business.retrieveRepos()
+        businessLogic.retrieveRepos()
     }
 
     private func displayRepos() {
@@ -68,7 +68,7 @@ final class RepoListViewController: UIViewController {
 
 extension RepoListViewController: SearchBarDelegate {
     func searchBar(_ bar: SearchBar, didChange text: String) {
-        business.filteredRepos(query: text)
+        businessLogic.filteredRepos(query: text)
     }
 }
 
@@ -91,7 +91,7 @@ extension RepoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        business.selectRepo(at: indexPath.row)
+        businessLogic.selectRepo(at: indexPath.row)
         router.routeToDetails()
     }
 }

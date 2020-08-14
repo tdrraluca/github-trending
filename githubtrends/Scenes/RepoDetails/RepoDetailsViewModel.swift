@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import Down
 
 
 struct RepoDetailsError: Error {
@@ -32,7 +33,33 @@ final class RepoDetailsViewModel: RepoDetailsBusiness {
 
     private var repoDetailsCurrentValueSubject: CurrentValueSubject<RepoDetails, Never>
 
+    private let preview: APIModel.RepoPreview
+    private var readme: String?
+
     init(preview: APIModel.RepoPreview) {
+        self.preview = preview
+
+        let repoDetails = RepoDetailsViewModel.detailsToPublish(preview: preview, readme: nil)
+        repoDetailsCurrentValueSubject = CurrentValueSubject<RepoDetails, Never>((repoDetails))
+    }
+
+    func retrieveRepoDetails() {
+        let worker = RepoReadmeWorker()
+        worker.retrieveRepoReadmeURL(author: preview.author, name: preview.name) { result in
+            result.onSuccess { url in
+                guard let url = url else { return }
+                worker.downloadRepoReadme(url: url) { result in
+                    result.onSuccess { readme in
+                        let repoDetails = RepoDetailsViewModel.detailsToPublish(preview: self.preview,
+                                                                                readme: readme)
+                        self.repoDetailsCurrentValueSubject.send(repoDetails)
+                    }
+                }
+            }
+        }
+    }
+
+    private static func detailsToPublish(preview: APIModel.RepoPreview, readme: String?)-> RepoDetails {
         let starsCount = Strings.starsCount.localized(with: "\(preview.starsCount)")
         let forksCount = Strings.forksCount.localized(with: "\(preview.forksCount)")
 
@@ -41,13 +68,10 @@ final class RepoDetailsViewModel: RepoDetailsBusiness {
                                       description: preview.descriptionText,
                                       starsCount: starsCount,
                                       forksCount: forksCount,
-                                      avatarURL: preview.avatarURL)
+                                      avatarURL: preview.avatarURL,
+                                      readme: readme)
 
-        repoDetailsCurrentValueSubject = CurrentValueSubject<RepoDetails, Never>(repoDetails)
-    }
-
-    func retrieveRepoDetails() {
-
+        return repoDetails
     }
 }
 

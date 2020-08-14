@@ -12,7 +12,7 @@ final class RepoListConfigurator {
     class func configureScene() -> UIViewController {
         let viewController = RepoListViewController()
         let viewModel = RepoListViewModel()
-        viewController.business = viewModel
+        viewController.businessLogic = viewModel
         viewController.router = RepoListRouter(viewController: viewController, output: viewModel)
         return NavigationController(rootViewController: viewController)
     }
