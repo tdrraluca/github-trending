@@ -14,6 +14,7 @@
 		1B48249424E6942300A51616 /* RepoReadmeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48249324E6942300A51616 /* RepoReadmeWorker.swift */; };
 		1B48249624E6AF7E00A51616 /* ReadmeDownloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48249524E6AF7E00A51616 /* ReadmeDownloadRequest.swift */; };
 		1B48249824E6BF0600A51616 /* Down.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B48249724E6BF0600A51616 /* Down.framework */; };
+		1B48249A24E71FDF00A51616 /* UIFont+Preferred.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48249924E71FDF00A51616 /* UIFont+Preferred.swift */; };
 		1B65AEFC24DDA22E0025182E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B65AEFB24DDA22E0025182E /* AppDelegate.swift */; };
 		1B65AF0024DDA22E0025182E /* RepoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B65AEFF24DDA22E0025182E /* RepoListViewController.swift */; };
 		1B65AF0524DDA22F0025182E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B65AF0424DDA22F0025182E /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		1B48249324E6942300A51616 /* RepoReadmeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoReadmeWorker.swift; sourceTree = "<group>"; };
 		1B48249524E6AF7E00A51616 /* ReadmeDownloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeDownloadRequest.swift; sourceTree = "<group>"; };
 		1B48249724E6BF0600A51616 /* Down.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Down.framework; path = Carthage/Build/iOS/Down.framework; sourceTree = SOURCE_ROOT; };
+		1B48249924E71FDF00A51616 /* UIFont+Preferred.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Preferred.swift"; sourceTree = "<group>"; };
 		1B65AEF824DDA22E0025182E /* githubtrends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = githubtrends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B65AEFB24DDA22E0025182E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B65AEFF24DDA22E0025182E /* RepoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewController.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				1B65AF2C24DDB54D0025182E /* UIView+Autolayout.swift */,
 				1B65AF3824DDCA380025182E /* Result+Chain.swift */,
 				1B65AF5024E03B4B0025182E /* UIViewController+Alert.swift */,
+				1B48249924E71FDF00A51616 /* UIFont+Preferred.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				1B1CA60224E312DC00AB002E /* DetailView.swift in Sources */,
 				1B65AF5124E03B4B0025182E /* UIViewController+Alert.swift in Sources */,
 				1B65AEFC24DDA22E0025182E /* AppDelegate.swift in Sources */,
+				1B48249A24E71FDF00A51616 /* UIFont+Preferred.swift in Sources */,
 				1B65AF2D24DDB54D0025182E /* UIView+Autolayout.swift in Sources */,
 				1B65AF3324DDC36D0025182E /* APIModel.swift in Sources */,
 				1B65AF5924E072790025182E /* RepoDetailsViewController.swift in Sources */,

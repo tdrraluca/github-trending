@@ -37,7 +37,7 @@ class DetailView: UIView {
 
         imageView.tintColor = .blueBayoux
         label.textColor = .blueBayoux
-        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline, weight: .semibold)
     }
 
     func set(_ model: DetailViewModel) {

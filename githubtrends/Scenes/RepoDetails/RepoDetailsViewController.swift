@@ -88,7 +88,7 @@ final class RepoDetailsViewController: UIViewController {
         avatarImageView.contentMode = .scaleAspectFill
 
         authorLabel.textColor = .pomegranate
-        authorLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+        authorLabel.font = UIFont.preferredFont(forTextStyle: .title2, weight: .bold)
         authorLabel.textAlignment = .center
 
         separatorView.backgroundColor = .alto

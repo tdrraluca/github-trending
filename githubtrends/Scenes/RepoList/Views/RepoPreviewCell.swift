@@ -18,7 +18,7 @@ class RepoPreviewCell: UITableViewCell {
         super.awakeFromNib()
 
         nameLabel.textColor = .black
-        nameLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        nameLabel.font = UIFont.preferredFont(forTextStyle: .headline, weight: .bold)
         nameLabel.adjustsFontForContentSizeCategory = true
 
         starsCountLabel.textColor = .black
