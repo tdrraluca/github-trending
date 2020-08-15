@@ -10,22 +10,15 @@ import Foundation
 import Combine
 import Down
 
+protocol RepoDetailsBusinessLogic {
+    var repoDetailsBinding: AnyPublisher<RepoDetails, Never> { get }
 
-struct RepoDetailsError: Error {
-    var localizedDescription: String {
-        return Strings.repoListErrorMessage.localized
-    }
-}
-
-protocol RepoDetailsBusiness {
     init(preview: APIModel.RepoPreview)
 
     func retrieveRepoDetails()
-
-    var repoDetailsBinding: AnyPublisher<RepoDetails, Never> { get }
 }
 
-final class RepoDetailsViewModel: RepoDetailsBusiness {
+final class RepoDetailsViewModel: RepoDetailsBusinessLogic {
 
     lazy var repoDetailsBinding: AnyPublisher<RepoDetails, Never> = {
         repoDetailsCurrentValueSubject.eraseToAnyPublisher()
@@ -45,9 +38,12 @@ final class RepoDetailsViewModel: RepoDetailsBusiness {
 
     func retrieveRepoDetails() {
         let worker = RepoReadmeWorker()
-        worker.retrieveRepoReadmeURL(author: preview.author, name: preview.name) { result in
-            result.onSuccess { url in
+        worker.retrieveRepoReadmeURL(author: preview.author, name: preview.name) {  result in
+
+            result.onSuccess { [weak self] url in
+                guard let self = self else { return }
                 guard let url = url else { return }
+
                 worker.downloadRepoReadme(url: url) { result in
                     result.onSuccess { readme in
                         let repoDetails = RepoDetailsViewModel.detailsToPublish(preview: self.preview,

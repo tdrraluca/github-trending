@@ -13,7 +13,7 @@ enum HTTPMethod {
     case post
 }
 
-enum ContentType {
+enum ParameterEncoding {
     case JSON
     case URLEncoded
 }
@@ -27,7 +27,7 @@ protocol Request {
 
     var parameters: [String: Any]? { get }
 
-    var contentType: ContentType { get }
+    var parameterEncoding: ParameterEncoding { get }
 
     var headers: [String: String]? { get }
 }
@@ -42,7 +42,7 @@ extension Request {
         return nil
     }
 
-    var contentType: ContentType {
+    var parameterEncoding: ParameterEncoding {
         return .JSON
     }
 

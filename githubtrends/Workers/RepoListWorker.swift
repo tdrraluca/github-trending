@@ -20,8 +20,4 @@ class RepoListWorker {
             }
         }
     }
-
-    func downloadReadme(url: URL, completion: @escaping(Result<String, APIClient.Error>) -> Void) {
-
-    }
 }

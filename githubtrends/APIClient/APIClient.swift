@@ -13,17 +13,17 @@ class APIClient {
 
     func perform<T: Request>(request: T, completion: @escaping (Result<T.AssociatedResponse, APIClient.Error>) -> Void) {
         let httpMethod = alamofireHTTPMethod(from: request.httpMethod)
-        let encoding = alamofireParameterEncoding(for: request.contentType)
+        let encoding = alamofireParameterEncoding(for: request.parameterEncoding)
 
         let headers: Alamofire.HTTPHeaders? = request.headers.map( { return Alamofire.HTTPHeaders($0) })
 
         AF.request(request.url,
-                          method: httpMethod,
-                          parameters: request.parameters,
-                          encoding: encoding,
-                          headers: headers)
-                .validate(statusCode: 200..<300)
-                .responseData { response in
+                   method: httpMethod,
+                   parameters: request.parameters,
+                   encoding: encoding,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseData { response in
 
             switch response.result {
             case .success:
@@ -58,7 +58,7 @@ class APIClient {
         }
     }
 
-    private func alamofireParameterEncoding(for contentType: ContentType) -> Alamofire.ParameterEncoding {
+    private func alamofireParameterEncoding(for contentType: ParameterEncoding) -> Alamofire.ParameterEncoding {
         switch contentType {
         case .JSON:
             return Alamofire.JSONEncoding.default

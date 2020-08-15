@@ -44,5 +44,4 @@ class DetailView: UIView {
         imageView.image = model.icon
         label.text = model.detail
     }
-    
 }

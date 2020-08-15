@@ -11,7 +11,7 @@ import Combine
 
 final class RepoListViewController: UIViewController {
 
-    var businessLogic: RepoListBusiness!
+    var businessLogic: RepoListBusinessLogic!
     var router: RepoListRouting!
     
     var reposSubscription: AnyCancellable?
@@ -32,8 +32,9 @@ final class RepoListViewController: UIViewController {
         view.backgroundColor = .white
         setupTableView()
         setupReposBinding()
-
         searchBar.delegate = self
+
+        businessLogic.retrieveRepos()
     }
 
     private func setupTableView() {
@@ -52,13 +53,11 @@ final class RepoListViewController: UIViewController {
                 self.displayRepos()
             }.onFailure { error in
                 self.showAlert(title: Strings.errorTitle.localized,
-                          message: error.localizedDescription,
-                          cancelButtonTitle: Strings.ok.localized,
-                          cancelHandler: nil)
+                               message: error.localizedDescription,
+                               cancelButtonTitle: Strings.ok.localized,
+                               cancelHandler: nil)
             }
         }
-
-        businessLogic.retrieveRepos()
     }
 
     private func displayRepos() {

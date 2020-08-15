@@ -17,11 +17,10 @@ struct RepoListError: Error {
 
 typealias RepoListResult = Result<[RepoPreview], RepoListError>
 
-protocol RepoListBusiness {
+protocol RepoListBusinessLogic {
     var reposBinding: AnyPublisher<RepoListResult, Never> { get }
 
     func retrieveRepos()
-
     func filteredRepos(query: String)
     func selectRepo(at index: Int)
 }
@@ -30,10 +29,10 @@ protocol RepoListOutput {
     var preview: APIModel.RepoPreview? { get }
 }
 
-final class RepoListViewModel: RepoListBusiness {
+final class RepoListViewModel: RepoListBusinessLogic {
 
-    private var repos = [RepoPreview]()
     private var apiRepos = [APIModel.RepoPreview]()
+    private var repos = [RepoPreview]()
     private var selectedRepoIndex: Int?
 
     lazy var reposBinding: AnyPublisher<RepoListResult, Never> = {

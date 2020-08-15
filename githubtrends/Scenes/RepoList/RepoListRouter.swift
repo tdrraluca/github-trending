@@ -17,7 +17,7 @@ protocol RepoListRouting {
 }
 
 final class RepoListRouter: RepoListDataPassing, RepoListRouting {
-    private var output: RepoListOutput
+    private let output: RepoListOutput
     private weak var viewController: UIViewController!
 
     init(viewController: UIViewController, output: RepoListOutput) {

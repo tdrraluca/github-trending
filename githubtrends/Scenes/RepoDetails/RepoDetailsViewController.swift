@@ -14,7 +14,7 @@ import WebKit
 
 final class RepoDetailsViewController: UIViewController {
 
-    var businessLogic: RepoDetailsBusiness!
+    var businessLogic: RepoDetailsBusinessLogic!
     var repoSubscription: AnyCancellable?
 
     @IBOutlet private weak var detailsSeparatorView: UIView!
@@ -42,7 +42,7 @@ final class RepoDetailsViewController: UIViewController {
 
         setupSubviews()
 
-        setupBindings()
+        setupRepoDetailsBinding()
 
         businessLogic.retrieveRepoDetails()
     }
@@ -52,36 +52,6 @@ final class RepoDetailsViewController: UIViewController {
 
         avatarImageView.layoutIfNeeded()
         avatarImageView.layer.cornerRadius = avatarImageView.bounds.width / 2
-    }
-
-    private func setupBindings() {
-        repoSubscription = businessLogic.repoDetailsBinding.sink { [weak self] repoDetails in
-            guard let self = self else { return }
-
-            self.navigationItem.title = repoDetails.name
-
-            if let avatarURL = repoDetails.avatarURL {
-                self.avatarImageView.kf.setImage(with: avatarURL)
-            } else {
-                self.avatarImageView.isHidden = true
-            }
-            self.authorLabel.text = repoDetails.author
-            self.descriptionLabel.text = repoDetails.description
-
-            self.starsDetailsView.set(DetailViewModel(icon: self.starImage(),
-                                                      detail: repoDetails.starsCount))
-            self.forksDetailView.set(DetailViewModel(icon: self.forkImage(),
-                                                     detail: repoDetails.forksCount))
-
-            if let readme = repoDetails.readme {
-                self.readmeTitleLabel.isHidden = false
-                self.markupViewContainer.isHidden = false
-                self.show(readme: readme)
-            } else {
-                self.readmeTitleLabel.isHidden = true
-                self.markupViewContainerHeightConstraint.constant = 0
-            }
-        }
     }
 
     private func setupSubviews() {
@@ -112,6 +82,36 @@ final class RepoDetailsViewController: UIViewController {
         readmeTitleLabel.text = "Readme.md"
         readmeTitleLabel.textColor = .papaGreen
         readmeTitleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+    }
+
+
+    private func setupRepoDetailsBinding() {
+        repoSubscription = businessLogic.repoDetailsBinding.sink { [weak self] repoDetails in
+            guard let self = self else { return }
+
+            self.navigationItem.title = repoDetails.name
+
+            if let avatarURL = repoDetails.avatarURL {
+                self.avatarImageView.kf.setImage(with: avatarURL)
+            } else {
+                self.avatarImageView.isHidden = true
+            }
+            self.authorLabel.text = repoDetails.author
+            self.descriptionLabel.text = repoDetails.description
+
+            self.starsDetailsView.set(DetailViewModel(icon: self.starImage(),
+                                                      detail: repoDetails.starsCount))
+            self.forksDetailView.set(DetailViewModel(icon: self.forkImage(),
+                                                     detail: repoDetails.forksCount))
+
+            if let readme = repoDetails.readme {
+                self.readmeTitleLabel.isHidden = false
+                self.show(readme: readme)
+            } else {
+                self.readmeTitleLabel.isHidden = true
+                self.markupViewContainerHeightConstraint.constant = 0
+            }
+        }
     }
 
     private func show(readme: String) {
